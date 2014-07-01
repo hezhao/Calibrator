@@ -9,3 +9,4 @@ http://mesh.brown.edu/calibration/software.html
 Added functions
 * Wait / Exposure time extended to 10 seconds
 * Compiles in Mac OS X 10.9
+* Outputs screen coordinates in 1080p projector
