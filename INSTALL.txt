@@ -1,0 +1,107 @@
+3D SCANNING SOFTWARE BUILD INSTRUCTIONS
+
+The software requires Qt and OpencV libraries. It should run on any system that 
+satisfies those requirements. It has been developed and tested using Qt 4.8.4 
+and OpencV 2.4.3 in Microsoft Windows 7. It has also been tried in Mac OS X and 
+while it builds and runs fine no extensive testing has been done on this platform.
+
+Feel free to modify the paths on top of 'build/scan3d-capture.pro'.
+
+
+---- Microsot Windows 7 - Visual Studio 2010 ----
+
+1) Install Qt (from binaries)
+
+Download http://releases.qt-project.org/qt4/source/qt-win-opensource-4.8.4-vs2010.exe
+
+Install to C:\Qt\4.8.4
+Add C:\Qt\4.8.4\bin to PATH
+
+2) Install OpenCV 2.4.3 (from binaries)
+
+Download http://sourceforge.net/projects/opencvlibrary/files/opencv-win/2.4.3/OpenCV-2.4.3.exe
+Extract/Install to C:\opencv\opencv-2.4.3
+Add C:\opencv\opencv-2.4.3\opencv\build\x86\vc10\bin to PATH
+
+3) Build scanning software
+
+cd scan3d-capture/build
+qmake
+nmake release
+
+
+---- GNU/Linux Debian Jessie (V4L2) ----
+
+1) Install Qt and libraries (from packages)
+
+sudo apt-get install libqt4-dev libv4l-dev
+
+2) Install OpenCV 2.4.3 (from source)
+
+mkdir ~/opencv && cd ~/opencv
+wget -c -O OpenCV-2.4.3.tar.bz2 http://sourceforge.net/projects/opencvlibrary/files/opencv-unix/2.4.3/OpenCV-2.4.3.tar.bz2
+tar xjf OpenCV-2.4.3.tar.bz2
+mkdir build && cd build
+cmake ../OpenCV-2.4.3
+make && sudo make install
+
+3) Build scanning software
+
+cd scan3d-capture/build
+qmake
+make
+
+
+---- Mac OS X Mountain Lion (MacPorts) ----
+
+1) Install Qt
+
+sudo port install qt4-mac
+
+2) Install OpenCV
+
+sudo port install opencv
+
+3) Build scanning software
+
+cd scan3d-capture/build
+qmake
+make
+
+
+---- Mac OS X Mountain Lion (Homebrew) ----
+
+0) Get Homebrew ready
+
+Install Homebrew if necessary:
+
+ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+
+or update Homebrew:
+
+brew update
+
+On some systems you may need to install git prior to 'brew update':
+
+brew install git
+
+Run and fix any problem found:
+
+brew doctor
+
+1) Install Qt
+
+brew install qt
+
+2) Install opencv
+
+brew install opencv
+
+3) Use either 10.6 or 10.9 for QMAKE_MACOSX_DEPLOYMENT_TARGET in build/scan3d-capture.pro
+
+4) Build scanning software
+
+cd scan3d-capture/build
+qmake
+make
+

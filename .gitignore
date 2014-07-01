@@ -12,6 +12,7 @@
 
 # Qt-es
 
+bin
 /.qmake.cache
 /.qmake.stash
 *.pro.user
@@ -26,3 +27,7 @@ Makefile*
 # QtCreator
 
 *.autosave
+
+# OS X
+
+.DS_Store
