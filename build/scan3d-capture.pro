@@ -6,9 +6,9 @@
 # Edit this section to make sure the paths match your system configuration
 
 # Windows 7
-win32:OPENCV_DIR = "C:/opencv/opencv-2.4.3/opencv/build"
+win32:OPENCV_DIR = "C:/opencv/build"
 win32:OPENCV_LIB_DIR = $$OPENCV_DIR/x86/vc10/lib
-win32:CV_VER = 243
+win32:CV_VER = 249
 
 # Debian Jessie
 unix:OPENCV_DIR = "/usr/local"
