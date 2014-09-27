@@ -28,7 +28,7 @@ FORMSDIR = $$BASEDIR/forms
 SOURCEDIR = $$BASEDIR/src
 
 
-NAME = scan3d-capture
+NAME = calibrator
 
 CONFIG += qt
 QT += opengl
@@ -68,8 +68,11 @@ unix:!macx {
 
 macx {
     LIBS += -framework Foundation -framework QTKit
-#    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
-    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9
+    # Lion and Mountain Lion
+    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
+
+    # Mavericks and Yosemite
+#    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9
 }
 
 CONFIG(release, debug|release) {

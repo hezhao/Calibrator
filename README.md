@@ -9,7 +9,7 @@ usage description wiki
 
 ## Build
 
-The software requires Qt and OpenCV libraries. It should run on Windows, Mac, and Linux that has these libraries installed. It has been developed and tested using Qt 4.8.6 and OpencV 2.4.9 in Mac OS X 10.8. Feel free to modify the paths on top of `build/scan3d-capture.pro`.
+The software requires Qt and OpenCV libraries. It should run on Windows, Mac, and Linux that has these libraries installed. It has been developed and tested using Qt 4.8.6 and OpencV 2.4.9 in Mac OS X 10.8. Feel free to modify the paths on top of `build/calibrator.pro`.
 
 ### Windows
 
@@ -18,7 +18,7 @@ The software requires Qt and OpenCV libraries. It should run on Windows, Mac, an
 2. Build with `nmake` or [Qt Creator](https://qt-project.org/downloads#qt-creator) IDE.
 
 	```
-	$ cd scan3d-capture/build
+	$ cd calibrator/build
 	$ qmake
 	$ nmake release
 	```
@@ -28,14 +28,14 @@ The software requires Qt and OpenCV libraries. It should run on Windows, Mac, an
 
 	```$ brew install qt opencv```
 
-2. Edit `scan3d-capture.pro` file, use `QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6` for Lion and Mountain Lion, use `QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9` for Mavericks and Yosemite.
+2. Edit `calibrator.pro` file, use `QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6` for Lion and Mountain Lion, use `QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9` for Mavericks and Yosemite.
 
-	`$ nano scan3d-capture/build/scan3d-capture.pro`
+	`$ nano calibrator/build/calibrator.pro`
 
 3. Build with `make` or [Qt Creator](https://qt-project.org/downloads#qt-creator) IDE.
 
 	```
-	$ cd scan3d-capture/build
+	$ cd calibrator/build
 	$ qmake
 	$ make
 	```
@@ -60,7 +60,7 @@ The software requires Qt and OpenCV libraries. It should run on Windows, Mac, an
 3. Build with `make`
 	
 	```
-	$ cd scan3d-capture/build
+	$ cd calibrator/build
 	$ qmake
 	$ make
 	```
@@ -77,6 +77,6 @@ BSD 3-Clause License
 
 ## Credits
 
-This software is modified from the [3D scanning software](http://mesh.brown.edu/calibration/software.html) originally written by Daniel Moreno and Gabriel Taubin from Brown University, based on calibration method from the following paper.
+This software is modified from the [scan3d-capture](http://mesh.brown.edu/calibration/software.html) originally written by Daniel Moreno and Gabriel Taubin from Brown University, based on calibration method from the following paper.
 
 Moreno, Daniel, and Gabriel Taubin. [Simple, accurate, and robust projector-camera calibration](http://dx.doi.org/10.1109/3DIMPVT.2012.77) *3D Imaging, Modeling, Processing, 2012 Second International Conference on Visualization and Transmission (3DIMPVT).* IEEE, 2012.
