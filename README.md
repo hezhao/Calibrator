@@ -3,92 +3,79 @@ Calibrator
 
 Calibrate your projector-camera system on a single click.
 
-# Usage
+## Usage
 
 usage description wiki
 
-# Build
+## Build
 
-The software requires Qt and OpenVV libraries. It should run on any system that satisfies those requirements. It has been developed and tested using Qt 4.8.4 and OpencV 2.4.3 in Microsoft Windows 7. It has also been tried in Mac OS X and while it builds and runs fine no extensive testing has been done on this platform.
+The software requires Qt and OpenCV libraries. It should run on Windows, Mac, and Linux that has these libraries installed. It has been developed and tested using Qt 4.8.6 and OpencV 2.4.9 in Mac OS X 10.8. Feel free to modify the paths on top of `build/scan3d-capture.pro`.
 
-Feel free to modify the paths on top of 'build/scan3d-capture.pro'.
+### Windows
 
+1. Install [Qt libraries 4.8.6 for Visual Studio 2010](http://download.qt-project.org/official_releases/qt/4.8/4.8.6/qt-opensource-windows-x86-vs2010-4.8.6.exe) and latest OpenCV binary. Remember to add `C:\Qt\4.8.6\bin` and `C:\opencv\build\x86\vc10\bin` to environment variable PATH.
 
-## Windows
+2. Build with `nmake` or [Qt Creator](https://qt-project.org/downloads#qt-creator) IDE.
 
-1) Install Qt (from binaries)
+	```
+	$ cd scan3d-capture/build
+	$ qmake
+	$ nmake release
+	```
 
-Download http://releases.qt-project.org/qt4/source/qt-win-opensource-4.8.4-vs2010.exe
+### Mac
+1. Install Qt and OpenCV from homebrew.
 
-Install to C:\Qt\4.8.4
-Add C:\Qt\4.8.4\bin to PATH
-
-2) Install OpenCV 2.4.3 (from binaries)
-
-Download http://sourceforge.net/projects/opencvlibrary/files/opencv-win/2.4.3/OpenCV-2.4.3.exe
-Extract/Install to C:\opencv\opencv-2.4.3
-Add C:\opencv\opencv-2.4.3\opencv\build\x86\vc10\bin to PATH
-
-3) Build scanning software
-
-cd scan3d-capture/build
-qmake
-nmake release
-
-## Mac
-1. Install Qt and OpenCV from homebrew
-
-```
-$ brew install qt opencv
-```
+	```$ brew install qt opencv```
 
 2. Edit `scan3d-capture.pro` file, use `QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6` for Lion and Mountain Lion, use `QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9` for Mavericks and Yosemite.
 
-```
-$ nano scan3d-capture/build/scan3d-capture.pro
-```
+	`$ nano scan3d-capture/build/scan3d-capture.pro`
 
-3. Build scanning software
+3. Build with `make` or [Qt Creator](https://qt-project.org/downloads#qt-creator) IDE.
 
-```
-$ cd scan3d-capture/build
-$ qmake
-$ make
-```
+	```
+	$ cd scan3d-capture/build
+	$ qmake
+	$ make
+	```
 
-## Linux Debian
+### Debian Linux (untested)
 
-1) Install Qt and libraries (from packages)
+1. Install Qt from binary.
 
-sudo apt-get install libqt4-dev libv4l-dev
+	`$ sudo apt-get install libqt4-dev libv4l-dev`
 
-2) Install OpenCV 2.4.3 (from source)
+2. Install OpenCV 2.4.3 from source.
 
-mkdir ~/opencv && cd ~/opencv
-wget -c -O OpenCV-2.4.3.tar.bz2 http://sourceforge.net/projects/opencvlibrary/files/opencv-unix/2.4.3/OpenCV-2.4.3.tar.bz2
-tar xjf OpenCV-2.4.3.tar.bz2
-mkdir build && cd build
-cmake ../OpenCV-2.4.3
-make && sudo make install
+	```
+	$ mkdir ~/opencv && cd ~/opencv
+	$ wget -c -O OpenCV-2.4.3.tar.bz2 http://sourceforge.net/projects/opencvlibrary/files/opencv-unix/2.4.3/OpenCV-2.4.3.tar.bz2
+	$ tar xjf OpenCV-2.4.3.tar.bz2
+	$ mkdir build && cd build
+	$ cmake ../OpenCV-2.4.3
+	$ make && sudo make install
+	```
+	
+3. Build with `make`
+	
+	```
+	$ cd scan3d-capture/build
+	$ qmake
+	$ make
+	```
 
-3) Build scanning software
-
-cd scan3d-capture/build
-qmake
-make
-
-
-# Features
+## Features
 
 * Generates both projector and camera intrinsic and extrinsic matrices
 * Spacial scan works with either 720p or 1080p projectors
 * Supports Windows, Mac OS X, and Linux
 
-# License
+## License
 
 BSD 3-Clause License
 
-# Credits
+## Credits
 
 This software is modified from the [3D scanning software](http://mesh.brown.edu/calibration/software.html) originally written by Daniel Moreno and Gabriel Taubin from Brown University, based on calibration method from the following paper.
 
