@@ -261,6 +261,15 @@ void CaptureDialog::_on_new_projector_image(QPixmap image)
 void CaptureDialog::on_screen_combo_currentIndexChanged(int index)
 {
     _projector.set_screen(index);
+
+    // auto set projector pattern bits
+    // 1920x1080 ==> 11bits, 1024x768 ==> 10bits
+    const char *currentText = screen_combo[0].currentText().toStdString().c_str();
+    int width, height;
+    sscanf(currentText, "Screen %d [%dx%d]", &index, &width, &height);
+    int length = width > height ? width : height;
+    int nbits = int(ceil(log2(length)));
+    projector_patterns_spin->setValue(APP->config.value("capture/pattern_count", nbits).toInt());
 }
 
 void CaptureDialog::on_camera_combo_currentIndexChanged(int index)
