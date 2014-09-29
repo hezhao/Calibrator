@@ -812,31 +812,12 @@ void Application::calibrate(void)
             std::cout << "ERROR: could no open " << filename2.toStdString() << std::endl;
             return;
         }
-        QString filename3 = QString("%1/proj1080p_%2.txt").arg(path).arg(i, 2, 10, QLatin1Char('0'));
-        FILE * fp3 = fopen(qPrintable(filename3), "w");
-        if (!fp3)
-        {
-            fclose(fp2);
-            std::cout << "ERROR: could no open " << filename3.toStdString() << std::endl;
-            return;
-        }
 
         std::cout << "Saved " << filename1.toStdString() << std::endl;
         std::cout << "Saved " << filename2.toStdString() << std::endl;
-        std::cout << "Saved " << filename3.toStdString() << std::endl;
 
-        std::vector<cv::Point2f>::const_iterator iter1 = corners.begin();
-        std::vector<cv::Point2f>::const_iterator iter2 = pcorners.begin();
-        for (unsigned j=0; j<corners.size(); j++, iter1++, iter2++)
-        {
-            fprintf(fp1, "%lf %lf\n", iter1->x, iter1->y);
-            fprintf(fp2, "%lf %lf\n", iter2->x, iter2->y);
-            // (x-1920/4)*2, (y-1080/4)*2
-            fprintf(fp3, "%lf %lf\n", (iter2->x - projector_size.width/4) * 2, (iter2->y - projector_size.height/4) * 2);
-        }
         fclose(fp1);
         fclose(fp2);
-        fclose(fp3);
     }
 
     processing_message("Calibration finished");
