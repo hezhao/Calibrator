@@ -3,6 +3,11 @@ Calibrator
 
 Calibrate your projector-camera system on a single click.
 
+* Generates both projector and camera intrinsic and extrinsic matrices
+* Spacial scan works with either 720p or 1080p projectors
+* Saves spacial scan image
+* Supports Windows, Mac OS X, and Linux
+
 ## Usage
 
 usage description wiki
@@ -64,12 +69,6 @@ The software requires Qt and OpenCV libraries. It should run on Windows, Mac, an
 	$ qmake
 	$ make
 	```
-
-## Features
-
-* Generates both projector and camera intrinsic and extrinsic matrices
-* Spacial scan works with either 720p or 1080p projectors
-* Supports Windows, Mac OS X, and Linux
 
 ## License
 

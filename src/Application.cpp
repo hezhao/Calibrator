@@ -831,7 +831,7 @@ void Application::calibrate(void)
         {
             fprintf(fp1, "%lf %lf\n", iter1->x, iter1->y);
             fprintf(fp2, "%lf %lf\n", iter2->x, iter2->y);
-            // (x-1920/4)*2, (y-1080/2)*2
+            // (x-1920/4)*2, (y-1080/4)*2
             fprintf(fp3, "%lf %lf\n", (iter2->x - projector_size.width/4) * 2, (iter2->y - projector_size.height/4) * 2);
         }
         fclose(fp1);
