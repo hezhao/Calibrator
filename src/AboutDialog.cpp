@@ -34,9 +34,9 @@ AboutDialog::AboutDialog(QWidget * parent, Qt::WindowFlags flags):
 {
     setupUi(this);
 
-    qt_version_label->setText(qVersion());
-    opencv_version_label->setText(CV_VERSION);
-    built_date_label->setText(QString("%1 %2").arg(__DATE__, __TIME__));
+//    qt_version_label->setText(qVersion());
+//    opencv_version_label->setText(CV_VERSION);
+//    built_date_label->setText(QString("%1 %2").arg(__DATE__, __TIME__));
 }
 
 AboutDialog::~AboutDialog()

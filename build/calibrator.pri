@@ -51,3 +51,6 @@ FORMS = \
         $$FORMSDIR/ProcessingDialog.ui \
         $$FORMSDIR/CalibrationDialog.ui \
         $$(NULL)
+
+RESOURCES += \
+        $$RESOURCEDIR/Calibrator.qrc
