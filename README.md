@@ -14,7 +14,7 @@ usage description wiki
 
 ## Build
 
-The software requires Qt and OpenCV libraries. It should run on Windows, Mac, and Linux that has these libraries installed. It has been developed and tested using Qt 4.8.6 and OpencV 2.4.9 in Mac OS X 10.8. Feel free to modify the paths on top of `build/calibrator.pro`.
+The software requires Qt and OpenCV libraries. It should run on Windows, Mac, and Linux that has these libraries installed. It has been developed and tested using Qt 4.8.6 and OpencV 2.4.9 in Mac OS X 10.9. Feel free to modify the paths on top of `build/Calibrator.pro`.
 
 ### Windows
 
@@ -78,4 +78,4 @@ BSD 3-Clause License
 
 This software is modified from the [scan3d-capture](http://mesh.brown.edu/calibration/software.html) originally written by Daniel Moreno and Gabriel Taubin from Brown University, based on calibration method from the following paper.
 
-Moreno, Daniel, and Gabriel Taubin. [Simple, accurate, and robust projector-camera calibration](http://dx.doi.org/10.1109/3DIMPVT.2012.77) *3D Imaging, Modeling, Processing, 2012 Second International Conference on Visualization and Transmission (3DIMPVT).* IEEE, 2012.
+Daniel Moreno and Gabriel Taubin. [Simple, Accurate, and Robust Projector-Camera Calibration](http://dx.doi.org/10.1109/3DIMPVT.2012.77). *3D Imaging, Modeling, Processing, 2012 Second International Conference on Visualization and Transmission (3DIMPVT).* IEEE, 2012.
