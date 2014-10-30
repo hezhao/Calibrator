@@ -813,6 +813,14 @@ void Application::calibrate(void)
             return;
         }
 
+        std::vector<cv::Point2f>::const_iterator iter1 = corners.begin();
+        std::vector<cv::Point2f>::const_iterator iter2 = pcorners.begin();
+        for (unsigned j=0; j<corners.size(); j++, iter1++, iter2++)
+        {
+            fprintf(fp1, "%lf %lf\n", iter1->x, iter1->y);
+            fprintf(fp2, "%lf %lf\n", iter2->x, iter2->y);
+        }
+
         std::cout << "Saved " << filename1.toStdString() << std::endl;
         std::cout << "Saved " << filename2.toStdString() << std::endl;
 
