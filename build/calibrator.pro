@@ -26,9 +26,10 @@ UI_DIR = GeneratedFiles
 DESTDIR = $$BASEDIR/bin
 FORMSDIR = $$BASEDIR/forms
 SOURCEDIR = $$BASEDIR/src
+RESOURCEDIR = $$BASEDIR/resources
 
 
-NAME = calibrator
+NAME = Calibrator
 
 CONFIG += qt
 QT += opengl
@@ -69,10 +70,11 @@ unix:!macx {
 macx {
     LIBS += -framework Foundation -framework QTKit
     # Lion and Mountain Lion
-    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
+#    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
 
     # Mavericks and Yosemite
-#    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9
+    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9
+    ICON = $$RESOURCEDIR/Calibrator.icns
 }
 
 CONFIG(release, debug|release) {

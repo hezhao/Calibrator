@@ -54,8 +54,8 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 enum Role {ImageFilenameRole = Qt::UserRole, GrayImageRole, ColorImageRole, 
            ProjectorWidthRole, ProjectorHeightRole};
 
-#define WINDOW_TITLE "3D Scanning Software"
-#define APP_NAME "scan3d-capture"
+#define WINDOW_TITLE "Calibrator"
+#define APP_NAME "Calibrator"
 
 
 //decode
