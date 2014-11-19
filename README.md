@@ -1,7 +1,9 @@
-Calibrator
+Calibrator: 
 ==============
 
-Calibrate your projector-camera system on a single click.
+![Calibrator logo](https://github.com/hezhao/Calibrator/raw/master/resources/icon-about.png)
+
+##### Calibrate your projector-camera system on a single click.
 
 * Generates both projector and camera intrinsic and extrinsic matrices
 * Spacial scan works with either 720p or 1080p projectors
