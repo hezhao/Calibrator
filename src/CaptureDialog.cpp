@@ -268,7 +268,7 @@ void CaptureDialog::on_screen_combo_currentIndexChanged(int index)
     int width, height;
     sscanf(currentText, "Screen %d [%dx%d]", &index, &width, &height);
     int length = width > height ? width : height;
-    int nbits = int(ceil(log2(length)));
+    int nbits = int(ceil(log((double)length)/log((double)2)));
     projector_patterns_spin->setValue(APP->config.value("capture/pattern_count", nbits).toInt());
 }
 
