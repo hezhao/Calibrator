@@ -1,4 +1,4 @@
-Calibrator: 
+Calibrator
 ==============
 
 ![Calibrator logo](https://github.com/hezhao/Calibrator/raw/master/resources/icon-about.png)
