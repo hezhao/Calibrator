@@ -82,4 +82,4 @@ This software is modified from the [scan3d-capture](http://mesh.brown.edu/calibr
 
 Daniel Moreno and Gabriel Taubin. [Simple, Accurate, and Robust Projector-Camera Calibration](http://dx.doi.org/10.1109/3DIMPVT.2012.77). *3D Imaging, Modeling, Processing, 2012 Second International Conference on Visualization and Transmission (3DIMPVT).* IEEE, 2012.
 
-Gabriel Taubin and Daniel Moreno. Method for generating an array of 3-d points. Inventors. [U.S. Patent 20140078260](http://www.google.com/patents/US20140078260), March 20, 2014.
+Gabriel Taubin and Daniel Moreno. Method for generating an array of 3-d points. [U.S. Patent 20140078260](http://www.google.com/patents/US20140078260), March 20, 2014.
