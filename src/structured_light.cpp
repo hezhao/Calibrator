@@ -53,9 +53,9 @@ bool sl::decode_pattern(const std::vector<std::string> & images, cv::Mat & patte
                             << (robust?"Robust ":"") 
                             << std::endl;
 
-    int total_images = static_cast<int>(images.size());
-    int total_patterns = total_images/2 - 1;
-    int total_bits = total_patterns/2;
+    unsigned int total_images = static_cast<unsigned int>(images.size());
+    unsigned int total_patterns = total_images/2 - 1;
+    unsigned int total_bits = total_patterns/2;
     if (2+4*total_bits!=total_images)
     {   //error
         std::cout << "[sl::decode_pattern] ERROR: cannot detect pattern and bit count from image set.\n";
