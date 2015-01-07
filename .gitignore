@@ -9,7 +9,6 @@
 *.so
 *.dll
 *.dylib
-lib/EDSDK/*
 
 # Qt-es
 
