@@ -171,7 +171,7 @@ void ProjectorWidget::update_pattern_bit_count(void)
     _hbits = 1;
     for (int i=(1<<_vbits); i<cols; i=(1<<_vbits)) { _vbits++; }
     for (int i=(1<<_hbits); i<rows; i=(1<<_hbits)) { _hbits++; }
-    _pattern_count = std::min(std::min(_vbits, _hbits), _pattern_count);
+//    _pattern_count = std::min(std::max(_vbits, _hbits), _pattern_count);
     std::cerr << " vbits " << _vbits << " / cols="<<cols<<", mvalue="<< ((1<<_vbits)-1) << std::endl;
     std::cerr << " hbits " << _hbits << " / rows="<<rows<<", mvalue="<< ((1<<_hbits)-1) << std::endl;
     std::cerr << " pattern_count="<< _pattern_count << std::endl; 
