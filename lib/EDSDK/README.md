@@ -1,0 +1,1 @@
+Move the `EDSDK` to this folder, replace `lib/EDSDK/Framekwork/EDSDK.framework` to be the 64 bit version.
