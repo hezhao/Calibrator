@@ -18,6 +18,9 @@ HEADERS += \
         $$SOURCEDIR/structured_light.hpp \
         $$SOURCEDIR/scan3d.hpp \
         $$SOURCEDIR/GLWidget.hpp \
+        $$SOURCEDIR/Camera.h \
+        $$SOURCEDIR/CameraBrowser.h \
+        $$SOURCEDIR/EDSDKcpp.h \
         $$(NULL)
 
 SOURCES += \
@@ -37,6 +40,8 @@ SOURCES += \
         $$SOURCEDIR/structured_light.cpp \
         $$SOURCEDIR/scan3d.cpp \
         $$SOURCEDIR/GLWidget.cpp \
+        $$SOURCEDIR/Camera.cpp \
+        $$SOURCEDIR/CameraBrowser.cpp \
         $$(NULL)
 
 macx {

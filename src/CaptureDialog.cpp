@@ -36,6 +36,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "Application.hpp"
 
+#include "EDSDKcpp.h"
+using namespace EDSDK;
+
+static CameraRef mCamera;
+
 CaptureDialog::CaptureDialog(QWidget * parent, Qt::WindowFlags flags): 
     QDialog(parent, flags),
     _projector(),
@@ -54,11 +59,17 @@ CaptureDialog::CaptureDialog(QWidget * parent, Qt::WindowFlags flags):
     current_message_label->setVisible(false);
     progress_label->setVisible(false);
     progress_bar->setVisible(false);
+    
+    // EDSDK
+    CameraBrowser::instance()->connectAddedHandler(&CaptureDialog::browserDidAddCamera, this);
+    CameraBrowser::instance()->connectRemovedHandler(&CaptureDialog::browserDidRemoveCamera,this);
+    CameraBrowser::instance()->connectEnumeratedHandler(&CaptureDialog::browserDidEnumerateCameras, this);
+    CameraBrowser::instance()->start();
 
     update_screen_combo();
     update_camera_combo();
 
-    projector_patterns_spin->setValue(APP->config.value("capture/pattern_count", 10).toInt());
+    projector_patterns_spin->setValue(APP->config.value("capture/pattern_count", 11).toInt());
     camera_exposure_spin->setMaximum(10000);
     camera_exposure_spin->setValue(APP->config.value("capture/exposure_time", 500).toInt());
     output_dir_line->setText(APP->get_root_dir());
@@ -92,7 +103,83 @@ CaptureDialog::~CaptureDialog()
     }
     config.setValue("capture/pattern_count", projector_patterns_spin->value());
     config.setValue("capture/exposure_time", camera_exposure_spin->value());
+    
 }
+
+void CaptureDialog::takePicture()
+{
+    if (mCamera != NULL && mCamera->hasOpenSession()) {
+        mCamera->requestTakePicture();
+    }
+}
+
+#pragma mark - CAMERA BROWSER
+
+void CaptureDialog::browserDidAddCamera(CameraRef camera) {
+    std::cout << "added a camera: " << camera->getName() << std::endl;
+    if (mCamera != NULL) {
+        return;
+    }
+    
+    mCamera = camera;
+    mCamera->connectRemovedHandler(&CaptureDialog::didRemoveCamera, this);
+    mCamera->connectFileAddedHandler(&CaptureDialog::didAddFile, this);
+    std::cout << "grabbing camera: " << camera->getName() << std::endl;
+
+    EDSDK::Camera::Settings settings = EDSDK::Camera::Settings();
+    //    settings.setPictureSaveLocation(kEdsSaveTo_Both);
+    //    settings.setShouldKeepAlive(false);
+    EdsError error = mCamera->requestOpenSession(settings);
+    if (error == EDS_ERR_OK) {
+        std::cout << "session opened" << std::endl;
+    }
+}
+
+void CaptureDialog::browserDidRemoveCamera(CameraRef camera) {
+    // NB - somewhat redundant as the camera will notify handler first
+    std::cout << "removed a camera: " << camera->getName() << std::endl;
+    if (camera != mCamera) {
+        return;
+    }
+    
+    std::cout << "our camera was disconnected" << std::endl;
+    mCamera = NULL;
+}
+
+void CaptureDialog::browserDidEnumerateCameras() {
+    std::cout << "enumerated cameras" << std::endl;
+}
+
+#pragma mark - CAMERA
+
+void CaptureDialog::didRemoveCamera(CameraRef camera) {
+    std::cout << "removed a camera: " << camera->getName() << std::endl;
+    if (camera != mCamera) {
+        return;
+    }
+    
+    std::cout << "our camera was disconnected" << std::endl;
+    mCamera = NULL;
+}
+
+
+void CaptureDialog::didAddFile(CameraRef camera, CameraFileRef file)
+{
+    boost::filesystem::path destinationFolderPath = boost::filesystem::path(_session.toStdString());
+    camera->requestDownloadFile(file, destinationFolderPath, [&](EdsError error, boost::filesystem::path outputFilePath) {
+        if (error == EDS_ERR_OK) {
+            std::cout << "image downloaded to '" << outputFilePath << "'" << std::endl;
+        }
+    });
+    
+    //    camera->requestReadFile(file, [&](EdsError error, ci::Surface surface) {
+    //        if (error == EDS_ERR_OK) {
+    //            mPhotoTexture = gl::Texture(surface);
+    //        }
+    //    });
+}
+
+
 
 void CaptureDialog::reset(void)
 {
@@ -152,25 +239,22 @@ int CaptureDialog::update_screen_combo(void)
 }
 
 int CaptureDialog::update_camera_combo(void)
-{
+{ 
     //disable signals
     camera_combo->blockSignals(true);
 
     //save current value
     QString current = camera_combo->currentText();
+    std::cout << current.toStdString() << std::endl;
 
     //update combo
     camera_combo->clear();
-    camera_combo->addItems(_video_input.list_devices());
-
-    //set current value
-    int index = camera_combo->findText(current);
-    if (index<0)
+    if (mCamera)
     {
-        QString saved_value = APP->config.value("capture/camera_name").toString();
-        index = camera_combo->findText(saved_value);
+        camera_combo->addItem(QString::fromStdString(mCamera->getName()));
     }
-    camera_combo->setCurrentIndex((index<0 ? 0 : index));
+    camera_combo->addItems(_video_input.list_devices());
+    camera_combo->setCurrentIndex(0);
 
     //enable signals
     camera_combo->blockSignals(false);
@@ -243,11 +327,22 @@ void CaptureDialog::_on_root_dir_changed(const QString & dirname)
 void CaptureDialog::_on_new_camera_image(cv::Mat image)
 {
     camera_image->setImage(image);
-    camera_resolution_label->setText(QString("[%1x%2]").arg(image.cols).arg(image.rows));
-
+    
+    // only show webcam resolution, not DSLR
+    if ( !mCamera )
+    {
+        camera_resolution_label->setText(QString("[%1x%2]").arg(image.cols).arg(image.rows));
+    }
+        
     if (_capture)
-    {   //save this image
-        cv::imwrite(QString("%1/cam_%2.png").arg(_session).arg(_projector.get_current_pattern() + 1, 2, 10, QLatin1Char('0')).toStdString(), image);
+    {
+        // take picture using DSLR if there is one
+        if (mCamera) takePicture();
+        
+        // take picture using webcam if there is no DSLR
+        else {
+            cv::imwrite(QString("%1/cam_%2.png").arg(_session).arg(_projector.get_current_pattern() + 1, 2, 10, QLatin1Char('0')).toStdString(), image);
+        }
         _capture = false;
         _projector.clear_updated();
     }
@@ -351,17 +446,17 @@ void CaptureDialog::on_capture_button_clicked(bool checked)
             QApplication::processEvents();
         }
 
-        //pause so the screen gets updated
-        wait(_wait_time);
-
         //capture
         _capture = true;
 
         //wait for camera
         while (_capture)
-        {   
+        {
             QApplication::processEvents();
         }
+        
+        //pause so the screen gets updated
+        wait(_wait_time);
     }
 
     //close projector

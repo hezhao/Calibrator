@@ -37,6 +37,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "ProjectorWidget.hpp"
 #include "VideoInput.hpp"
 
+#include "EDSDKcpp.h"
+using namespace EDSDK;
+
 class CaptureDialog : public QDialog, public Ui::CaptureDialog
 {
     Q_OBJECT
@@ -61,6 +64,14 @@ public:
     void stop_camera(void);
 
     static void wait(int msecs);
+    
+    void browserDidAddCamera(CameraRef camera);
+    void browserDidRemoveCamera(CameraRef camera);
+    void browserDidEnumerateCameras();
+    void didRemoveCamera(CameraRef camera);
+    void didAddFile(CameraRef camera, CameraFileRef file);
+    
+    void takePicture();
 
 public slots:
     void on_close_cancel_button_clicked(bool checked = false);

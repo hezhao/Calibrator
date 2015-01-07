@@ -5,20 +5,6 @@
 # Build configuration
 # Edit this section to make sure the paths match your system configuration
 
-# Windows 7
-win32:OPENCV_DIR = "C:/opencv/build"
-win32:OPENCV_LIB_DIR = $$OPENCV_DIR/x86/vc10/lib
-win32:CV_VER = 249
-
-# Debian Jessie
-unix:OPENCV_DIR = "/usr/local"
-unix:OPENCV_LIB_DIR = $$OPENCV_DIR/lib
-
-# Mac OS X Mountain Lion (homebrew)
-macx:OPENCV_DIR = "/usr/local"
-macx:OPENCV_LIB_DIR = $$OPENCV_DIR/lib
-
-##########################################################################
 
 BASEDIR = ..
 TOPDIR = $$BASEDIR/..
@@ -28,6 +14,23 @@ FORMSDIR = $$BASEDIR/forms
 SOURCEDIR = $$BASEDIR/src
 RESOURCEDIR = $$BASEDIR/resources
 
+##########################################################################
+
+# Windows 7
+win32:OPENCV_DIR = "C:/opencv/build"
+win32:OPENCV_LIB_DIR = $$OPENCV_DIR/x86/vc10/lib
+win32:CV_VER = 249
+
+# Debian Jessie
+unix:OPENCV_DIR = "/usr/local"
+unix:OPENCV_LIB_DIR = $$OPENCV_DIR/lib
+
+# Mac OS X
+macx:OPENCV_DIR = "/usr/local"
+macx:OPENCV_LIB_DIR = $$OPENCV_DIR/lib
+macx:EDSDK_DIR = $$BASEDIR/lib/EDSDK
+
+##########################################################################
 
 NAME = Calibrator
 
@@ -68,7 +71,9 @@ unix:!macx {
 }
 
 macx {
-    LIBS += -framework Foundation -framework QTKit
+    QMAKE_CXXFLAGS += -std=c++11
+    QMAKE_LFLAGS += -F$$EDSDK_DIR/Framework
+    LIBS += -framework Foundation -framework QTKit -framework EDSDK
     # Lion and Mountain Lion
 #    QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6
 
@@ -85,7 +90,7 @@ else {
     CONFIG += console
 }
 
-LIBS += -L$$OPENCV_LIB_DIR $$CV_LIBS
-INCLUDEPATH += $$SOURCEDIR $$UI_DIR $$OPENCV_DIR/include
+LIBS += -L$$OPENCV_LIB_DIR $$CV_LIBS -lboost_filesystem -lboost_system
+INCLUDEPATH += $$SOURCEDIR $$UI_DIR $$OPENCV_DIR/include $$EDSDK_DIR/Header
 
 include($${NAME}.pri)
