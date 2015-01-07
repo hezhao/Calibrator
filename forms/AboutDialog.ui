@@ -111,7 +111,7 @@
         </font>
        </property>
        <property name="text">
-        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;(c) 2014 Zhao He&lt;br/&gt;(c) 2012 Daniel Moreno, Gabriel Taubin&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;(c) 2014-2015 Zhao He&lt;br/&gt;(c) 2012 Daniel Moreno, Gabriel Taubin&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
      </item>

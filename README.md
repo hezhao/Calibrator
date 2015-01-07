@@ -6,19 +6,46 @@ Calibrator
 ##### Calibrate your projector-camera system on a single click.
 
 * Generates both projector and camera intrinsic and extrinsic matrices
-* Spacial scan works with either 720p or 1080p projectors
+* Spacial scan supports 720p and 1080p projectors
+* Spacial scan supports Canon DSLRs
 * Saves spacial scan image
 * Supports Windows, Mac OS X, and Linux
 
-## Usage
+### Usage
 
 usage description wiki
 
-## Build
+### Dependencies
 
-The software requires Qt and OpenCV libraries. It should run on Windows, Mac, and Linux that has these libraries installed. It has been developed and tested using Qt 4.8.6 and OpencV 2.4.9 in Mac OS X 10.9. Feel free to modify the paths on top of `build/Calibrator.pro`.
+- [Qt](http://qt-project.org/) (4.8.6)
+- [OpenCV](http://opencv.org/) (2.4.9)
+- [Boost](http://www.boost.org/) (1.56)
+- [EDSDK](http://www.usa.canon.com/cusa/consumer/standard_display/sdk_homepage) (2.15)
 
-### Windows
+
+
+### Build
+
+#### Mac
+1. Install Qt and OpenCV from homebrew.
+
+	```$ brew install qt opencv boost```
+	
+2. Move the `EDSDK` folder to `lib/EDSDK`, replace `lib/EDSDK/Framekwork/EDSDK.framework` to be the 64 bit version.
+
+3. Edit `calibrator.pro` file, use `QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6` for Lion and Mountain Lion, use `QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9` for Mavericks and Yosemite.
+
+	`$ nano calibrator/build/calibrator.pro`
+
+4. Build with `make` or [Qt Creator](https://qt-project.org/downloads#qt-creator) IDE.
+
+	```
+	$ cd calibrator/build
+	$ qmake
+	$ make
+	```
+
+#### Windows
 
 1. Install [Qt libraries 4.8.6 for Visual Studio 2010](http://download.qt-project.org/official_releases/qt/4.8/4.8.6/qt-opensource-windows-x86-vs2010-4.8.6.exe) and latest OpenCV binary. Remember to add `C:\Qt\4.8.6\bin` and `C:\opencv\build\x86\vc10\bin` to environment variable PATH.
 
@@ -30,24 +57,8 @@ The software requires Qt and OpenCV libraries. It should run on Windows, Mac, an
 	$ nmake release
 	```
 
-### Mac
-1. Install Qt and OpenCV from homebrew.
 
-	```$ brew install qt opencv```
-
-2. Edit `calibrator.pro` file, use `QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6` for Lion and Mountain Lion, use `QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9` for Mavericks and Yosemite.
-
-	`$ nano calibrator/build/calibrator.pro`
-
-3. Build with `make` or [Qt Creator](https://qt-project.org/downloads#qt-creator) IDE.
-
-	```
-	$ cd calibrator/build
-	$ qmake
-	$ make
-	```
-
-### Debian Linux (untested)
+#### Debian Linux (untested)
 
 1. Install Qt from binary.
 
@@ -72,11 +83,11 @@ The software requires Qt and OpenCV libraries. It should run on Windows, Mac, an
 	$ make
 	```
 
-## License
+### License
 
 BSD 3-Clause License
 
-## Credits
+### Credits
 
 This software is modified from the [scan3d-capture](http://mesh.brown.edu/calibration/software.html) originally written by Daniel Moreno and Gabriel Taubin from Brown University, based on calibration method described in the following paper and   patent.
 
