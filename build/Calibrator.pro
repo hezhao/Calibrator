@@ -90,7 +90,7 @@ else {
     CONFIG += console
 }
 
-LIBS += -L$$OPENCV_LIB_DIR $$CV_LIBS -lboost_filesystem -lboost_system
+LIBS += -L$$OPENCV_LIB_DIR $$CV_LIBS
 INCLUDEPATH += $$SOURCEDIR $$UI_DIR $$OPENCV_DIR/include $$EDSDK_DIR/Header
 
 include($${NAME}.pri)

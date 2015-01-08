@@ -19,9 +19,7 @@ usage description wiki
 
 - [Qt](http://qt-project.org/) (4.8.6)
 - [OpenCV](http://opencv.org/) (2.4.9)
-- [Boost](http://www.boost.org/) (1.56)
 - [EDSDK-cpp](https://github.com/hezhao/EDSDK-cpp) (2.15)
-
 
 
 ### Build
@@ -29,7 +27,7 @@ usage description wiki
 #### Mac
 1. Install Qt and OpenCV from homebrew.
 
-	```$ brew install qt opencv boost```
+	```$ brew install qt opencv```
 	
 2. Move the `EDSDK` folder to `lib/EDSDK`, replace `lib/EDSDK/Framekwork/EDSDK.framework` to be the 64 bit version.
 

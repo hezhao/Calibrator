@@ -16,12 +16,10 @@
 #endif
 
 #include <iostream>
-#include <boost/filesystem.hpp>
+#include <QDir>
 #include "EDSDK.h"
 
 namespace EDSDK {
-
-namespace fs = boost::filesystem;
 
 typedef std::shared_ptr<class Camera> CameraRef;
 typedef std::shared_ptr<class CameraFile> CameraFileRef;
@@ -94,7 +92,7 @@ public:
     EdsError requestCloseSession();
 
     EdsError requestTakePicture();
-    void requestDownloadFile(const CameraFileRef& file, const fs::path& destinationFolderPath, const std::function<void(EdsError error, fs::path outputFilePath)>& callback);
+    void requestDownloadFile(const CameraFileRef& file, const QDir& destinationFolderPath, const std::function<void(EdsError error, QString outputFilePath)>& callback);
 //    void requestReadFile(const CameraFileRef& file, const std::function<void(EdsError error, ci::Surface8u surface)>& callback);
 
 private:

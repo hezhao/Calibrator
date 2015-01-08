@@ -156,20 +156,20 @@ EdsError Camera::requestTakePicture() {
     return error;
 }
 
-    void Camera::requestDownloadFile(const CameraFileRef& file, const fs::path& destinationFolderPath, const std::function<void(EdsError error, boost::filesystem::path outputFilePath)>& callback) {
+    void Camera::requestDownloadFile(const CameraFileRef& file, const QDir& destinationFolderPath, const std::function<void(EdsError error, QString outputFilePath)>& callback) {
     // check if destination exists and create if not
-    if (!fs::exists(destinationFolderPath)) {
-        bool status = fs::create_directories(destinationFolderPath);
+    if ( !destinationFolderPath.exists() ) {
+        bool status = destinationFolderPath.mkpath(".");
         if (!status) {
-            std::cerr << "ERROR - failed to create destination folder path '" << destinationFolderPath << "'" << std::endl;
+            std::cerr << "ERROR - failed to create destination folder path '" << destinationFolderPath.dirName().toStdString() << "'" << std::endl;
             return callback(EDS_ERR_INTERNAL_ERROR, NULL);
         }
     }
 
-    fs::path filePath = destinationFolderPath / file->getName();
+    QString filePath = destinationFolderPath.filePath(QString::fromStdString(file->getName()));
 
     EdsStreamRef stream = NULL;
-    EdsError error = EdsCreateFileStream(filePath.generic_string().c_str(), kEdsFileCreateDisposition_CreateAlways, kEdsAccess_ReadWrite, &stream);
+    EdsError error = EdsCreateFileStream(filePath.toStdString().c_str(), kEdsFileCreateDisposition_CreateAlways, kEdsAccess_ReadWrite, &stream);
     if (error != EDS_ERR_OK) {
         std::cerr << "ERROR - failed to create file stream" << std::endl;
         goto download_cleanup;

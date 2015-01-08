@@ -165,10 +165,10 @@ void CaptureDialog::didRemoveCamera(CameraRef camera) {
 
 void CaptureDialog::didAddFile(CameraRef camera, CameraFileRef file)
 {
-    boost::filesystem::path destinationFolderPath = boost::filesystem::path(_session.toStdString());
-    camera->requestDownloadFile(file, destinationFolderPath, [&](EdsError error, boost::filesystem::path outputFilePath) {
+    QDir destinationFolderPath(_session);
+    camera->requestDownloadFile(file, destinationFolderPath, [&](EdsError error, QString outputFilePath) {
         if (error == EDS_ERR_OK) {
-            std::cout << "image downloaded to '" << outputFilePath << "'" << std::endl;
+            std::cout << "image downloaded to '" << outputFilePath.toStdString() << "'" << std::endl;
         }
     });
     

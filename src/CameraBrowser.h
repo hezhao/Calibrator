@@ -14,7 +14,7 @@ namespace EDSDK {
 
 typedef std::shared_ptr<class CameraBrowser> CameraBrowserRef;
 
-class CameraBrowser : public std::enable_shared_from_this<CameraBrowser>, private boost::noncopyable {
+class CameraBrowser : public std::enable_shared_from_this<CameraBrowser> {
 public:
     static CameraBrowserRef instance();
     ~CameraBrowser();
