@@ -83,7 +83,7 @@ usage description wiki
 
 ### License
 
-BSD 3-Clause License
+[BSD 3-Clause License](LICENSE)
 
 ### Credits
 
