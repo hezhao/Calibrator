@@ -197,8 +197,13 @@ void CaptureDialog::finish(void)
 
 void CaptureDialog::on_close_cancel_button_clicked(bool checked)
 {
+
     if (close_cancel_button->text()=="Close")
     {
+        if ( mCamera && mCamera-> isLiveViewing() )
+        {
+            mCamera->endLiveView();
+        }
         accept();
     }
     else if (!_cancel)
@@ -298,6 +303,11 @@ bool CaptureDialog::start_camera(void)
 
 void CaptureDialog::stop_camera(void)
 {
+    if ( mCamera && mCamera->isLiveViewing() )
+    {
+        mCamera->endLiveView();
+    }
+    
     //disconnect display signal first
     disconnect(&_video_input, SIGNAL(new_image(cv::Mat)), this, SLOT(_on_new_camera_image(cv::Mat)));
 
@@ -326,25 +336,46 @@ void CaptureDialog::_on_root_dir_changed(const QString & dirname)
 
 void CaptureDialog::_on_new_camera_image(cv::Mat image)
 {
-    camera_image->setImage(image);
-    
     // only show webcam resolution, not DSLR
-    if ( !mCamera )
+    if ( mCamera == NULL )
     {
         camera_resolution_label->setText(QString("[%1x%2]").arg(image.cols).arg(image.rows));
     }
-        
+    
+    
     if (_capture)
     {
         // take picture using DSLR if there is one
-        if (mCamera) takePicture();
+        if (mCamera)
+        {
+            if ( mCamera->isLiveViewing() ) mCamera->endLiveView();
+            takePicture();
+        }
         
         // take picture using webcam if there is no DSLR
-        else {
+        else
+        {
+            camera_image->setImage(image);
             cv::imwrite(QString("%1/cam_%2.png").arg(_session).arg(_projector.get_current_pattern() + 1, 2, 10, QLatin1Char('0')).toStdString(), image);
         }
         _capture = false;
         _projector.clear_updated();
+    }
+    
+    else
+    {
+        if ( mCamera )
+        {
+            if( mCamera->isLiveViewing() == false ) mCamera->startLiveView();
+            QImage img;
+            mCamera->requestDownloadEvfData( img );
+            cv::Mat mat = cv::Mat(img.height(), img.width(), CV_8UC3, img.bits(), img.bytesPerLine());
+            camera_image->setImage(mat);
+        }
+        else
+        {
+            camera_image->setImage(image);
+        }
     }
 }
 
