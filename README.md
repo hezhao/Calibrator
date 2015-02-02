@@ -8,6 +8,7 @@ Calibrator
 * Generates both projector and camera intrinsic and extrinsic matrices
 * Spacial scan supports 720p and 1080p projectors
 * Spacial scan supports Canon DSLRs
+* Live view with Canon DSLRs
 * Saves spacial scan image
 * Supports Windows, Mac OS X, and Linux
 
