@@ -20,7 +20,7 @@ usage description wiki
 
 - [Qt](http://qt-project.org/) (4.8.6)
 - [OpenCV](http://opencv.org/) (2.4.9)
-- [EDSDK-cpp](https://github.com/hezhao/EDSDK-cpp) (2.15)
+- [EDSDK](http://www.usa.canon.com/cusa/consumer/standard_display/sdk_homepage) (2.15)
 
 
 ### Build
