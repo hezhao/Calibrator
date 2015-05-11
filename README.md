@@ -10,11 +10,22 @@ Calibrator
 * Spacial scan supports Canon DSLRs
 * Live view with Canon DSLRs
 * Saves spacial scan image
-* Supports Windows, Mac OS X, and Linux
+* Supports Windows, OS X, and Linux (Canon DSLR not supported on Linux)
 
 ### Usage
 
-usage description wiki
+##### Parameters
+
+**Corners**: checkerboard pattern size (e.g. [this pattern](http://docs.opencv.org/_downloads/pattern.png) has corners of 9x6)
+
+**Size**: physical dimension of checkerboard grid or circle spacing, usually in millimeter
+
+**Threshold**: projector view binary image threshold
+
+**b**:  percentage of light emitted by a turned-off projector pixel
+
+**m**: 
+
 
 ### Dependencies
 
@@ -25,7 +36,7 @@ usage description wiki
 
 ### Build
 
-#### Mac
+#### OS X
 1. Install Qt and OpenCV from homebrew.
 
 	```$ brew install qt opencv```
