@@ -19,7 +19,7 @@ RESOURCEDIR = $$BASEDIR/resources
 # Windows 7
 win32:OPENCV_DIR = "C:/opencv/build"
 win32:OPENCV_LIB_DIR = $$OPENCV_DIR/x86/vc10/lib
-win32:CV_VER = 249
+win32:CV_VER = 2411
 
 # Debian Jessie
 unix:OPENCV_DIR = "/usr/local"

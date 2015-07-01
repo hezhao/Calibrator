@@ -7,10 +7,10 @@ Calibrator
 
 * Generates both projector and camera intrinsic and extrinsic matrices
 * Spacial scan supports 720p and 1080p projectors
-* Spacial scan supports Canon DSLRs
-* Live view with Canon DSLRs
+* Spacial scan supports Canon DSLR
+* Live view with Canon DSLR
 * Saves spacial scan image
-* Supports Windows, OS X, and Linux (Canon DSLR not supported on Linux)
+* Supports Windows and OS X
 
 ### Usage
 
@@ -30,7 +30,7 @@ Calibrator
 ### Dependencies
 
 - [Qt](http://qt-project.org/) (4.8.6)
-- [OpenCV](http://opencv.org/) (2.4.9)
+- [OpenCV](http://opencv.org/) (2.4.11)
 - [EDSDK](http://www.usa.canon.com/cusa/consumer/standard_display/sdk_homepage) (2.15)
 
 
@@ -42,10 +42,6 @@ Calibrator
 	```$ brew install qt opencv```
 	
 2. Move the `EDSDK` folder to `lib/EDSDK`, replace `lib/EDSDK/Framekwork/EDSDK.framework` to be the 64 bit version.
-
-3. Edit `calibrator.pro` file, use `QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.6` for Lion and Mountain Lion, use `QMAKE_MACOSX_DEPLOYMENT_TARGET = 10.9` for Mavericks and Yosemite.
-
-	`$ nano calibrator/build/calibrator.pro`
 
 4. Build with `make` or [Qt Creator](https://qt-project.org/downloads#qt-creator) IDE.
 
@@ -65,32 +61,6 @@ Calibrator
 	$ cd calibrator/build
 	$ qmake
 	$ nmake release
-	```
-
-
-#### Debian Linux (untested)
-
-1. Install Qt from binary.
-
-	`$ sudo apt-get install libqt4-dev libv4l-dev`
-
-2. Install OpenCV 2.4.3 from source.
-
-	```
-	$ mkdir ~/opencv && cd ~/opencv
-	$ wget -c -O OpenCV-2.4.3.tar.bz2 http://sourceforge.net/projects/opencvlibrary/files/opencv-unix/2.4.3/OpenCV-2.4.3.tar.bz2
-	$ tar xjf OpenCV-2.4.3.tar.bz2
-	$ mkdir build && cd build
-	$ cmake ../OpenCV-2.4.3
-	$ make && sudo make install
-	```
-	
-3. Build with `make`
-	
-	```
-	$ cd calibrator/build
-	$ qmake
-	$ make
 	```
 
 ### License
