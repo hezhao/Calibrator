@@ -16,7 +16,7 @@ Calibrator
 
 ##### Parameters
 
-**Corners**: checkerboard pattern size (e.g. [this pattern](http://docs.opencv.org/_downloads/pattern.png) has corners of 9x6)
+**Corners**: checkerboard pattern size (e.g. [this pattern](http://docs.opencv.org/2.4/_downloads/pattern.png) has corners of 9x6)
 
 **Size**: physical dimension of checkerboard grid or circle spacing, usually in millimeter
 
@@ -31,7 +31,7 @@ Calibrator
 
 - [Qt](http://qt-project.org/) (4.8.6)
 - [OpenCV](http://opencv.org/) (2.4.11)
-- [EDSDK](http://www.usa.canon.com/cusa/consumer/standard_display/sdk_homepage) (2.15)
+- [EDSDK](https://www.didp.canon-europa.com/) (2.15)
 
 
 ### Build
